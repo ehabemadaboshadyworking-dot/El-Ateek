@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>يوسف أحمد | مدرب لياقة بدنية محترف</title>
+  <meta name="description" content="يوسف أحمد - مدرب لياقة بدنية محترف" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #0A0A0A;
+      color: #FFFFFF;
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+
+    /* ═══════════════════════════════════════════════════
+       CSS VARIABLES (DARK DEFAULT)
+    ═══════════════════════════════════════════════════ */
+    :root {
+      --primary: #FF4C01;
+      --primary-dark: #cc3d00;
+      --bg: #0A0A0A;
+      --surface: #161616;
+      --text-heading: #FFFFFF;
+      --text-body: #A0A0A0;
+      --border: #2a2a2a;
+      --whatsapp: #25D366;
+    }
+    body.light {
+      --bg: #F9F9F9;
+      --surface: #FFFFFF;
+      --text-heading: #1A1A1A;
+      --text-body: #4A4A4A;
+      --border: #e0e0e0;
+    }
+    body { background: var(--bg); color: var(--text-heading); }
+    body.light .hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.8) 100%); }
+
+    /* ═══════════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(10,10,10,0.8);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease;
+    }
+    body.light .navbar { background: rgba(249,249,249,0.85); }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: var(--text-body);
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-controls { display: flex; align-items: center; gap: 0.5rem; }
+    .nav-btn {
+      padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 0.75rem; font-weight: 700;
+      background: var(--surface); color: var(--text-heading); border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .nav-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .hamburger { display: none; background: none; padding: 0.5rem; color: var(--text-heading); }
+    .hamburger svg { width: 24px; height: 24px; }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem; flex-direction: column; gap: 0.75rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 0.9rem; color: var(--text-body); padding: 0.5rem 0; }
+    .mobile-menu a:hover { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; background: var(--surface);
+    }
+    .hero-bg-placeholder {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: var(--surface); border-bottom: 3px dashed var(--border);
+    }
+    .hero-bg-placeholder span { color: var(--text-body); font-size: 0.9rem; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.8) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; text-align: center; padding: 2rem 1.5rem; max-width: 650px;
+    }
+    .profile-placeholder {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  border: 4px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 0 40px rgba(255,76,1,0.3);
+}
+
+/* خلي SVG ورا */
+.profile-placeholder svg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  color: var(--text-body);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* الصورة تملى الدائرة */
+.profile-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+    /* ═══════════════════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════════════════ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 0.6rem; font-weight: 600; font-size: 0.9rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; box-shadow: 0 4px 15px rgba(255,76,1,0.3);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,76,1,0.4); }
+    .btn-primary:active { transform: scale(0.96); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 0.6rem; font-weight: 600; font-size: 0.9rem;
+      background: transparent; color: var(--primary); border: 2px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+    .btn-outline:active { transform: scale(0.96); }
+
+    /* ═══════════════════════════════════════════════════
+       SECTIONS COMMON
+    ═══════════════════════════════════════════════════ */
+    .section { padding: 5rem 1.5rem; }
+    .section-alt { background: var(--surface); }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.3rem; }
+    .section-header p { color: var(--text-body); font-size: 1rem; }
+
+    /* ═══════════════════════════════════════════════════
+       IMAGE PLACEHOLDER
+    ═══════════════════════════════════════════════════ */
+    .img-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--surface); border: 2px dashed var(--border); border-radius: 1rem;
+      color: var(--text-body); font-size: 0.75rem; gap: 0.4rem;
+    }
+    .img-placeholder svg { width: 32px; height: 32px; opacity: 0.5; }
+
+    /* ═══════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════ */
+    .img-placeholder {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem; /* نفس الشكل القديم */
+}
+
+/* ✨ نخلي الـ SVG ورا ومش مزعج */
+.img-placeholder svg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* 🔥 ده أهم تعديل */
+.about-img-inserted {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+/* باقي الكود زي ما هو */
+.about-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 3rem; 
+  align-items: center; 
+}
+
+.about-img { 
+  height: 380px; 
+}
+
+.about-text p { 
+  color: var(--text-body); 
+  margin-bottom: 1rem; 
+  line-height: 1.8; 
+}
+
+.stats-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem; 
+  margin-top: 1.5rem; 
+}
+
+.stat-card {
+  text-align: center; 
+  padding: 1.2rem; 
+  border-radius: 1rem;
+  background: var(--surface); 
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 10px 30px rgba(255,76,1,0.12); 
+}
+
+.stat-card .num { 
+  font-size: 1.8rem; 
+  font-weight: 800; 
+  color: var(--primary); 
+}
+
+.stat-card .label { 
+  font-size: 0.75rem; 
+  color: var(--text-body); 
+  margin-top: 0.2rem; 
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+
+  .about-img { 
+    height: 260px; 
+    max-width: 400px; 
+    margin: 0 auto; 
+  }
+}
+    /* ═══════════════════════════════════════════════════
+       SKILLS
+    ═══════════════════════════════════════════════════ */
+    .skills-container { max-width: 650px; margin: 0 auto; }
+    .skill-item { margin-bottom: 1.5rem; }
+    .skill-header { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 600; }
+    .skill-header span:last-child { color: var(--primary); }
+    .skill-bar { height: 12px; border-radius: 999px; background: var(--surface); overflow: hidden; border: 1px solid var(--border); }
+    .skill-fill {
+      height: 100%; border-radius: 999px; width: 0;
+      background: linear-gradient(90deg, var(--primary), #ff7733);
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CERTIFICATES
+    ═══════════════════════════════════════════════════ */
+/* الحاوية الأساسية للصورة */
+.img-placeholder {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #000; /* خلفية علشان الفراغ يكون شكله شيك */
+}
+
+/* SVG placeholder */
+.img-placeholder svg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* 🔥 أهم جزء - الصورة */
+.cert-img-inserted {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  max-width: 100%;
+  max-height: 100%;
+  
+  width: auto;
+  height: auto;
+
+  transform: translate(-50%, -50%);
+  
+  object-fit: contain; /* يمنع القص */
+  z-index: 2;
+}
+
+
+/* GRID */
+.certs-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 2rem; 
+}
+
+/* CARD */
+.cert-card {
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 1rem; 
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  cursor: pointer;
+}
+
+.cert-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 12px 40px rgba(255,76,1,0.12); 
+}
+
+/* صورة الشهادة */
+.cert-card .cert-img { 
+  height: 190px; 
+  position: relative;
+}
+
+/* النص */
+.cert-card .cert-info { 
+  padding: 1.2rem; 
+}
+
+.cert-card h3 { 
+  font-size: 0.95rem; 
+  font-weight: 700; 
+  color: var(--text-heading); 
+  margin-bottom: 0.3rem; 
+}
+
+.cert-card p { 
+  font-size: 0.8rem; 
+  color: var(--text-body); 
+}
+
+/* موبايل */
+@media (max-width: 768px) {
+  .certs-grid { 
+    grid-template-columns: 1fr; 
+    max-width: 400px; 
+    margin: 0 auto; 
+  }
+}
+
+/* تابلت */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .certs-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+    /* ═══════════════════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════════════════ */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .gallery-item { border-radius: 1rem; overflow: hidden; }
+    .gallery-item .img-placeholder { height: 220px; }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item .img-placeholder { height: 160px; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════════════ */
+    .contact-inner { max-width: 550px; margin: 0 auto; text-align: center; }
+    .contact-inner p { color: var(--text-body); margin-bottom: 2rem; }
+    .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 0.6rem; font-weight: 600; font-size: 0.9rem;
+      background: var(--whatsapp); color: #fff; transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+    .btn-whatsapp:active { transform: scale(0.96); }
+
+    /* ═══════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════ */
+    .footer {
+      border-top: 1px solid var(--border); padding: 2rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-inner p { font-size: 0.85rem; color: var(--text-body); }
+    .footer-social { display: flex; gap: 1rem; }
+    .footer-social a { color: var(--text-body); transition: color 0.3s ease; }
+    .footer-social a:hover { color: var(--primary); }
+    .footer-social svg { width: 20px; height: 20px; }
+
+    /* ═══════════════════════════════════════════════════
+       FLOATING WHATSAPP
+    ═══════════════════════════════════════════════════ */
+    .whatsapp-float {
+      position: fixed; z-index: 90; bottom: 1.5rem;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s ease;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    [dir="rtl"] .whatsapp-float { left: 1.5rem; }
+    [dir="ltr"] .whatsapp-float { right: 1.5rem; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 28px; height: 28px; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(37,211,102,0.3); }
+      50% { box-shadow: 0 0 35px rgba(37,211,102,0.6); }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       FADE-UP ANIMATION
+    ═══════════════════════════════════════════════════ */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-overlay .modal-content {
+      max-width: 90vw; max-height: 85vh; border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-body); font-size: 1rem; padding: 3rem;
+      background: var(--surface); border: 2px dashed var(--border);
+      min-width: 300px; min-height: 200px;
+    }
+  </style>
+</head>
+<body class="dark">
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">El Ateek</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="#about" data-ar="من أنا" data-en="About">من أنا</a>
+        <a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a>
+        <a href="#certs" data-ar="الشهادات" data-en="Certificates">الشهادات</a>
+        <a href="#gallery" data-ar="المعرض" data-en="Gallery">المعرض</a>
+        <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+      </div>
+      <div class="nav-controls">
+        <button class="nav-btn" id="langToggle" onclick="toggleLang()">EN</button>
+        <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMobile()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#hero" onclick="closeMobile()" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="#about" onclick="closeMobile()" data-ar="من أنا" data-en="About">من أنا</a>
+      <a href="#skills" onclick="closeMobile()" data-ar="المهارات" data-en="Skills">المهارات</a>
+      <a href="#certs" onclick="closeMobile()" data-ar="الشهادات" data-en="Certificates">الشهادات</a>
+      <a href="#gallery" onclick="closeMobile()" data-ar="المعرض" data-en="Gallery">المعرض</a>
+      <a href="#contact" onclick="closeMobile()" data-ar="تواصل" data-en="Contact">تواصل</a>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-placeholder">
+      <img class="hero-bg-img" src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=2070&auto=format&fit=crop" alt="أضف صورة خلفية هنا" data-ar="أضف صورة خلفية هنا" data-en="Add background image here" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="profile-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"></svg>
+        <img class="profile-img" src="images/My_photo.jpg">
+      </div>
+      <h1 data-ar="يوسف أحمد" data-en="Youssef Ahmed">يوسف أحمد</h1>
+      <p class="subtitle" data-ar="مدرب لياقة بدنية محترف" data-en="Professional Fitness Coach">مدرب لياقة بدنية محترف</p>
+      <p class="desc" data-ar="أساعدك على تحقيق أهدافك البدنية من خلال برامج تدريب مخصصة وخطط تغذية علمية. أكثر من 8 سنوات من الخبرة في تحويل الأجسام وتغيير الحياة." data-en="I help you achieve your fitness goals through personalized training programs and science-based nutrition plans. Over 8 years of experience in body transformation and life changing.">أساعدك على تحقيق أهدافك البدنية من خلال برامج تدريب مخصصة وخطط تغذية علمية. أكثر من 8 سنوات من الخبرة في تحويل الأجسام وتغيير الحياة.</p>
+      <div class="hero-btns">
+        <a href="CV/Youssef_Ahmed_Fitness_Trainer_CV.pdf" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-ar="تحميل السيرة الذاتية" data-en="Download CV">تحميل السيرة الذاتية</span>
+        </a>
+        <a href="#contact" class="btn-outline">
+          <span data-ar="تواصل الآن" data-en="Contact Now">تواصل الآن</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 data-ar="من أنا" data-en="About Me">من أنا</h2>
+        <p data-ar="تعرّف على مدربك" data-en="Meet Your Coach">تعرّف على مدربك</p>
+      </div>
+      <div class="about-grid">
+        <div class="fade-up">
+          <div class="img-placeholder about-img">
+            <svg></svg>
+            <img class="about-img-inserted" src="images/muscles.jpg">
+          </div>
+        </div>
+        <div class="about-text fade-up">
+          <p data-ar="أنا يوسف أحمد، مدرب لياقة بدنية معتمد ومتخصص في التدريب الشخصي وبناء الأجسام. بدأت رحلتي في عالم اللياقة منذ أكثر من 15 سنوات، وخلال هذه الفترة ساعدت مئات العملاء على تحقيق أهدافهم." data-en="I'm Youssef Ahmed, a certified fitness trainer specializing in personal training and bodybuilding. I started my journey in the fitness world over 8 years ago, and during that time I've helped hundreds of clients achieve their goals.">أنا يوسف أحمد، مدرب لياقة بدنية معتمد ومتخصص في التدريب الشخصي وبناء الأجسام. بدأت رحلتي في عالم اللياقة منذ أكثر من 8 سنوات، وخلال هذه الفترة ساعدت مئات العملاء على تحقيق أهدافهم.</p>
+          <p data-ar="أؤمن بأن اللياقة البدنية ليست مجرد تمارين، بل هي أسلوب حياة متكامل يجمع بين التدريب الذكي والتغذية السليمة والتعافي المناسب." data-en="I believe that fitness isn't just about exercises — it's a complete lifestyle that combines smart training, proper nutrition, and adequate recovery.">أؤمن بأن اللياقة البدنية ليست مجرد تمارين، بل هي أسلوب حياة متكامل يجمع بين التدريب الذكي والتغذية السليمة والتعافي المناسب.</p>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="num">8+</div>
+              <div class="label" data-ar="سنوات الخبرة" data-en="Years of Experience">سنوات الخبرة</div>
+            </div>
+            <div class="stat-card">
+              <div class="num">500+</div>
+              <div class="label" data-ar="عملاء سعداء" data-en="Happy Clients">عملاء سعداء</div>
+            </div>
+            <div class="stat-card">
+              <div class="num">50+</div>
+              <div class="label" data-ar="برامج تدريبية" data-en="Training Programs">برامج تدريبية</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 data-ar="المهارات" data-en="Skills">المهارات</h2>
+        <p data-ar="ما أتميز به" data-en="What I Excel At">ما أتميز به</p>
+      </div>
+      <div class="skills-container fade-up">
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="تدريب شخصي" data-en="Personal Training">تدريب شخصي</span><span>95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="95"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="تغذية رياضية" data-en="Sports Nutrition">تغذية رياضية</span><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="كارديو و HIIT" data-en="Cardio & HIIT">كارديو و HIIT</span><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="كمال أجسام" data-en="Bodybuilding">كمال أجسام</span><span>92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="92"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="تأهيل إصابات" data-en="Injury Rehabilitation">تأهيل إصابات</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span data-ar="تدريب وظيفي" data-en="Functional Training">تدريب وظيفي</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-pct="85"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CERTIFICATES ═══ -->
+<section class="section" id="certs">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>الشهادات</h2>
+      <p>اعتمادات مهنية</p>
+    </div>
+
+    <div class="certs-grid">
+
+      <div class="cert-card fade-up">
+        <div class="img-placeholder cert-img">
+          <svg></svg>
+          <img class="cert-img-inserted" src="Certificate/1.jpg">
+        </div>
+        <div class="cert-info">
+          <h3>اخصائي تغذيه (ISSA)</h3>
+          <p>اعتماد دولي في التدريب الشخصي وتصميم البرامج التدريبية</p>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up" >
+        <div class="img-placeholder cert-img">
+          <svg></svg>
+          <img class="cert-img-inserted" src="Certificate/2.jpg">
+        </div>
+        <div class="cert-info">
+          <h3> معد بدني معتمد من الأكاديمية الدولية للطب الرياضي </h3>
+          <p>حاصل على شهادة في التدريب الشخصي، وتصميم البرامج، وتحويل جسم العميل.</p>
+        </div>
+      </div>
+
+      <div class="cert-card fade-up">
+        <div class="img-placeholder cert-img">
+          <svg></svg>
+          <img class="cert-img-inserted" src="Certificate/4.jpg">
+        </div>
+        <div class="cert-info">
+          <h3>مدرب شخصي (ISSA)</h3>
+          <p>اكتساب المعرفة في مجال تخطيط التغذية، واستراتيجيات النظام الغذائي، ودعم أهداف تحويل الجسم.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section class="section section-alt" id="gallery">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2 data-ar="المعرض" data-en="Gallery">المعرض</h2>
+        <p data-ar="لمحات من التدريب" data-en="Training Highlights">لمحات من التدريب</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-up">
+          <div class="img-placeholder" style="height:220px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <img class="gallery-img" src="Customers/1.jpeg" alt="أضف صورة 1" data-ar="أضف صورة 1" data-en="Add image 1" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        </div>
+        <div class="gallery-item fade-up">
+          <div class="img-placeholder" style="height:220px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <img class="gallery-img" src="Customers/2.jpeg" alt="أضف صورة 2" data-ar="أضف صورة 2" data-en="Add image 2" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        </div>
+        <div class="gallery-item fade-up">
+          <div class="img-placeholder" style="height:220px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <img class="gallery-img" src="Customers/3.jpeg" alt="أضف صورة 3" data-ar="أضف صورة 3" data-en="Add image 3" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-inner fade-up">
+        <div class="section-header">
+          <h2 data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
+          <p data-ar="ابدأ رحلتك اليوم" data-en="Start Your Journey Today">ابدأ رحلتك اليوم</p>
+        </div>
+        <p data-ar="هل أنت مستعد لتغيير حياتك؟ تواصل معي الآن وابدأ أول خطوة نحو جسم أفضل وحياة أكثر صحة." data-en="Are you ready to change your life? Contact me now and take the first step toward a better body and healthier life.">هل أنت مستعد لتغيير حياتك؟ تواصل معي الآن وابدأ أول خطوة نحو جسم أفضل وحياة أكثر صحة.</p>
+        <div class="contact-btns">
+          <a href="https://wa.me/qr/J6TUCJ3JXABWB1" target="_blank" class="btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-ar="واتساب" data-en="WhatsApp">واتساب</span>
+          </a>
+          <a href="https://www.facebook.com/share/1HV7Q8hwce/" target="_blank" class="btn-outline">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span data-ar="فيسبوك" data-en="Facebook">فيسبوك</span>
+          </a>
+          <a href="https://www.instagram.com/coach_u.sef?igsh=MXc4ZnQ2MGlmYng4dQ==" target="_blank" class="btn-outline">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <span data-ar="إنستغرام" data-en="Instagram">إنستغرام</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p data-ar="© 2026 يوسف أحمد. جميع الحقوق محفوظة." data-en="© 2026 Youssef Ahmed. All rights reserved.">© 2026 يوسف أحمد. جميع الحقوق محفوظة.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/qr/J6TUCJ3JXABWB1" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://www.facebook.com/share/1HV7Q8hwce/" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.instagram.com/coach_u.sef?igsh=MXc4ZnQ2MGlmYng4dQ==" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ FLOATING WHATSAPP ═══ -->
+  <a href="https://wa.me/qr/J6TUCJ3JXABWB1" target="_blank" class="whatsapp-float">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ═══ MODAL ═══ -->
+  <div class="modal-overlay" id="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <img class="modal-cert-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="أضف صورة الشهادة هنا" data-ar="أضف صورة الشهادة هنا" data-en="Add certificate image here" style="max-width:100%;max-height:100%;object-fit:contain;display:block;">
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════════════ -->
+  <script>
+    /* ── Language ── */
+    let currentLang = 'ar';
+    function toggleLang() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('langToggle').textContent = currentLang === 'ar' ? 'EN' : 'عربي';
+      document.querySelectorAll('[data-ar]').forEach(function(el) {
+        el.textContent = el.getAttribute('data-' + currentLang);
+      });
+    }
+
+    /* ── Theme ── */
+    let isDark = true;
+    function toggleTheme() {
+      isDark = !isDark;
+      document.body.classList.toggle('light', !isDark);
+      document.body.classList.toggle('dark', isDark);
+      document.getElementById('themeToggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    /* ── Mobile Menu ── */
+    function toggleMobile() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    /* ── Modal ── */
+    function openModal() {
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ── Scroll Reveal ── */
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    /* ── Skills Animation ── */
+    var skillObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var fills = entry.target.querySelectorAll('.skill-fill');
+          fills.forEach(function(fill) {
+            fill.style.width = fill.getAttribute('data-pct') + '%';
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    var skillsSection = document.getElementById('skills');
+    if (skillsSection) skillObserver.observe(skillsSection);
+  </script>
+</body>
+</html>
