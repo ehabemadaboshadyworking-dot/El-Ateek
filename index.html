@@ -400,15 +400,144 @@
     /* ═══════════════════════════════════════════════════
        GALLERY
     ═══════════════════════════════════════════════════ */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .gallery-item { border-radius: 1rem; overflow: hidden; }
-    .gallery-item .img-placeholder { height: 220px; }
+.contact-inner {
+  max-width: 550px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-    @media (max-width: 768px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item .img-placeholder { height: 160px; }
-    }
+.contact-inner p {
+  color: var(--text-body);
+  margin-bottom: 2rem;
+}
 
+.contact-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--whatsapp);
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp:active {
+  transform: scale(0.96);
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.gallery-item {
+  width: 100%;
+}
+
+.gallery-card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  cursor: pointer;
+  background: #111;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-img {
+  transform: scale(1.06);
+}
+
+@media (max-width: 992px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-card {
+    height: 240px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-card {
+    height: 220px !important;
+  }
+}
+
+/* Modal */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.image-modal.active {
+  display: flex;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  transition: 0.3s ease;
+}
+
+.close-modal:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
     /* ═══════════════════════════════════════════════════
        CONTACT
     ═══════════════════════════════════════════════════ */
@@ -664,36 +793,39 @@
 </section>
 
   <!-- ═══ GALLERY ═══ -->
-  <section class="section section-alt" id="gallery">
-    <div class="container">
-      <div class="section-header fade-up">
-        <h2 data-ar="المعرض" data-en="Gallery">المعرض</h2>
-        <p data-ar="لمحات من التدريب" data-en="Training Highlights">لمحات من التدريب</p>
+<section class="section section-alt" id="gallery">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 data-ar="المعرض" data-en="Gallery">المعرض</h2>
+      <p data-ar="لمحات من التدريب" data-en="Training Highlights">لمحات من التدريب</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up">
+        <div class="img-placeholder gallery-card" style="height: 260px;">
+          <img class="gallery-img" src="Customers/1.jpeg" alt="صورة تدريب 1" data-ar="صورة تدريب 1" data-en="Training image 1">
+        </div>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item fade-up">
-          <div class="img-placeholder" style="height:220px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <img class="gallery-img" src="Customers/1.jpeg" alt="أضف صورة 1" data-ar="أضف صورة 1" data-en="Add image 1" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+
+      <div class="gallery-item fade-up">
+        <div class="img-placeholder gallery-card" style="height: 260px;">
+          <img class="gallery-img" src="Customers/2.jpeg" alt="صورة تدريب 2" data-ar="صورة تدريب 2" data-en="Training image 2">
         </div>
-        <div class="gallery-item fade-up">
-          <div class="img-placeholder" style="height:220px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <img class="gallery-img" src="Customers/2.jpeg" alt="أضف صورة 2" data-ar="أضف صورة 2" data-en="Add image 2" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+      </div>
+
+      <div class="gallery-item fade-up">
+        <div class="img-placeholder gallery-card" style="height: 260px;">
+          <img class="gallery-img" src="Customers/3.jpeg" alt="صورة تدريب 3" data-ar="صورة تدريب 3" data-en="Training image 3">
         </div>
-        <div class="gallery-item fade-up">
-          <div class="img-placeholder" style="height:220px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <img class="gallery-img" src="Customers/3.jpeg" alt="أضف صورة 3" data-ar="أضف صورة 3" data-en="Add image 3" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
-        </div>
-    
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
+<div class="image-modal" id="imageModal">
+  <span class="close-modal" id="closeModal">&times;</span>
+  <img id="modalImage" src="" alt="Preview Image">
+</div>
   <!-- ═══ CONTACT ═══ -->
   <section class="section" id="contact">
     <div class="container">
@@ -817,5 +949,39 @@
     var skillsSection = document.getElementById('skills');
     if (skillsSection) skillObserver.observe(skillsSection);
   </script>
+  <script>
+  const galleryImages = document.querySelectorAll('.gallery-img');
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeModal = document.getElementById('closeModal');
+
+  galleryImages.forEach((img) => {
+    img.addEventListener('click', () => {
+      modalImage.src = img.src;
+      modalImage.alt = img.alt;
+      imageModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  closeModal.addEventListener('click', () => {
+    imageModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  imageModal.addEventListener('click', (e) => {
+    if (e.target === imageModal) {
+      imageModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      imageModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
 </body>
 </html>
