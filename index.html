@@ -341,44 +341,27 @@
     /* ═══════════════════════════════════════════════════
        CERTIFICATES
     ═══════════════════════════════════════════════════ */
-/* الحاوية الأساسية للصورة */
+/* الحاوية */
 .img-placeholder {
-  position: relative;
-  overflow: hidden;
   border-radius: 1rem;
-  background: #000; /* خلفية علشان الفراغ يكون شكله شيك */
+  overflow: hidden;
+  background: #000;
 }
 
-/* SVG placeholder */
-.img-placeholder svg {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.3;
-  z-index: 1;
+/* 🔥 صورة الشهادة (حل نهائي بدون مشاكل) */
+.cert-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 190px;
+  background: #000;
 }
 
-/* 🔥 أهم جزء - الصورة */
 .cert-img-inserted {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  
   max-width: 100%;
   max-height: 100%;
-  
-  width: auto;
-  height: auto;
-
-  transform: translate(-50%, -50%);
-  
-  object-fit: contain; /* يمنع القص */
-  z-index: 2;
+  object-fit: contain;
 }
-
 
 /* GRID */
 .certs-grid { 
@@ -393,36 +376,47 @@
   border: 1px solid var(--border); 
   border-radius: 1rem; 
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  transition: 0.3s; 
   cursor: pointer;
 }
 
 .cert-card:hover { 
-  transform: translateY(-4px); 
+  transform: translateY(-5px); 
   box-shadow: 0 12px 40px rgba(255,76,1,0.12); 
 }
 
-/* صورة الشهادة */
-.cert-card .cert-img { 
-  height: 190px; 
-  position: relative;
-}
-
 /* النص */
-.cert-card .cert-info { 
+.cert-info { 
   padding: 1.2rem; 
 }
 
 .cert-card h3 { 
   font-size: 0.95rem; 
   font-weight: 700; 
-  color: var(--text-heading); 
   margin-bottom: 0.3rem; 
 }
 
 .cert-card p { 
   font-size: 0.8rem; 
   color: var(--text-body); 
+}
+
+/* 🔥 الشهادة الرابعة (Featured) */
+.featured {
+  grid-column: span 3;
+  text-align: center;
+}
+
+.featured .cert-img {
+  height: 230px;
+}
+
+.featured h3 {
+  font-size: 1.2rem;
+}
+
+.featured p {
+  font-size: 0.9rem;
 }
 
 /* موبايل */
@@ -432,12 +426,20 @@
     max-width: 400px; 
     margin: 0 auto; 
   }
+
+  .featured {
+    grid-column: span 1;
+  }
 }
 
 /* تابلت */
 @media (min-width: 769px) and (max-width: 1024px) {
   .certs-grid { 
     grid-template-columns: repeat(2, 1fr); 
+  }
+
+  .featured {
+    grid-column: span 2;
   }
 }
     /* ═══════════════════════════════════════════════════
@@ -662,42 +664,69 @@
 <section class="section" id="certs">
   <div class="container">
     <div class="section-header fade-up">
-      <h2>الشهادات</h2>
-      <p>اعتمادات مهنية</p>
+      <h2 data-ar="الشهادات" data-en="Certificates">الشهادات</h2>
+      <p data-ar="اعتمادات مهنية" data-en="Professional Certifications">اعتمادات مهنية</p>
     </div>
 
     <div class="certs-grid">
 
+      <!-- 1 -->
       <div class="cert-card fade-up">
         <div class="img-placeholder cert-img">
-          <svg></svg>
           <img class="cert-img-inserted" src="Certificate/1.jpg">
         </div>
         <div class="cert-info">
-          <h3>اخصائي تغذيه (ISSA)</h3>
-          <p>اعتماد دولي في التدريب الشخصي وتصميم البرامج التدريبية</p>
+          <h3 data-ar="أخصائي تغذية (ISSA)" data-en="Nutrition Specialist (ISSA)">
+            أخصائي تغذية (ISSA)
+          </h3>
+          <p data-ar="شهادة تثبت الاعتماد في مجال التغذية." data-en="Certification in nutrition field.">
+            شهادة تثبت الاعتماد في مجال التغذية.
+          </p>
         </div>
       </div>
 
-      <div class="cert-card fade-up" >
+      <!-- 2 -->
+      <div class="cert-card fade-up">
         <div class="img-placeholder cert-img">
-          <svg></svg>
           <img class="cert-img-inserted" src="Certificate/2.jpg">
         </div>
         <div class="cert-info">
-          <h3> معد بدني معتمد من الأكاديمية الدولية للطب الرياضي </h3>
-          <p>حاصل على شهادة في التدريب الشخصي، وتصميم البرامج، وتحويل جسم العميل.</p>
+          <h3 data-ar="معد بدني معتمد" data-en="Certified Fitness Coach">
+            معد بدني معتمد
+          </h3>
+          <p data-ar="شهادة في إعداد البرامج التدريبية." data-en="Certification in training programs design.">
+            شهادة في إعداد البرامج التدريبية.
+          </p>
         </div>
       </div>
 
+      <!-- 3 -->
       <div class="cert-card fade-up">
         <div class="img-placeholder cert-img">
-          <svg></svg>
           <img class="cert-img-inserted" src="Certificate/4.jpg">
         </div>
         <div class="cert-info">
-          <h3>مدرب شخصي (ISSA)</h3>
-          <p>اكتساب المعرفة في مجال تخطيط التغذية، واستراتيجيات النظام الغذائي، ودعم أهداف تحويل الجسم.</p>
+          <h3 data-ar="مدرب شخصي (ISSA)" data-en="Personal Trainer (ISSA)">
+            مدرب شخصي (ISSA)
+          </h3>
+          <p data-ar="اعتماد كمدرب شخصي دولي." data-en="International personal trainer certification.">
+            اعتماد كمدرب شخصي دولي.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 (Featured) -->
+      <div class="cert-card featured fade-up">
+        <div class="img-placeholder cert-img">
+          <img class="cert-img-inserted" src="Certificate/3.jpg">
+        </div>
+        <div class="cert-info">
+          <h3 data-ar="شهادة مدرب شخصي معتمد دوليًا (NASM)" data-en="Certified Personal Trainer (NASM)">
+            شهادة مدرب شخصي معتمد دوليًا (NASM)
+          </h3>
+          <p data-ar="شهادة تثبت الحصول على اعتماد كمدرب شخصي دولي." data-en="Certification proving international personal trainer qualification.">
+            شهادة تثبت الحصول على اعتماد كمدرب شخصي دولي.
+          </p>
         </div>
       </div>
 
