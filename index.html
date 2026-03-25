@@ -341,27 +341,44 @@
     /* ═══════════════════════════════════════════════════
        CERTIFICATES
     ═══════════════════════════════════════════════════ */
-/* الحاوية */
+/* الحاوية الأساسية للصورة */
 .img-placeholder {
-  border-radius: 1rem;
+  position: relative;
   overflow: hidden;
-  background: #000;
+  border-radius: 1rem;
+  background: #000; /* خلفية علشان الفراغ يكون شكله شيك */
 }
 
-/* 🔥 صورة الشهادة (حل نهائي بدون مشاكل) */
-.cert-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 190px;
-  background: #000;
+/* SVG placeholder */
+.img-placeholder svg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  z-index: 1;
 }
 
+/* 🔥 أهم جزء - الصورة */
 .cert-img-inserted {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  
+  width: auto;
+  height: auto;
+
+  transform: translate(-50%, -50%);
+  
+  object-fit: contain; /* يمنع القص */
+  z-index: 2;
 }
+
 
 /* GRID */
 .certs-grid { 
@@ -376,47 +393,36 @@
   border: 1px solid var(--border); 
   border-radius: 1rem; 
   overflow: hidden;
-  transition: 0.3s; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   cursor: pointer;
 }
 
 .cert-card:hover { 
-  transform: translateY(-5px); 
+  transform: translateY(-4px); 
   box-shadow: 0 12px 40px rgba(255,76,1,0.12); 
 }
 
+/* صورة الشهادة */
+.cert-card .cert-img { 
+  height: 190px; 
+  position: relative;
+}
+
 /* النص */
-.cert-info { 
+.cert-card .cert-info { 
   padding: 1.2rem; 
 }
 
 .cert-card h3 { 
   font-size: 0.95rem; 
   font-weight: 700; 
+  color: var(--text-heading); 
   margin-bottom: 0.3rem; 
 }
 
 .cert-card p { 
   font-size: 0.8rem; 
   color: var(--text-body); 
-}
-
-/* 🔥 الشهادة الرابعة (Featured) */
-.featured {
-  grid-column: span 3;
-  text-align: center;
-}
-
-.featured .cert-img {
-  height: 230px;
-}
-
-.featured h3 {
-  font-size: 1.2rem;
-}
-
-.featured p {
-  font-size: 0.9rem;
 }
 
 /* موبايل */
@@ -426,20 +432,12 @@
     max-width: 400px; 
     margin: 0 auto; 
   }
-
-  .featured {
-    grid-column: span 1;
-  }
 }
 
 /* تابلت */
 @media (min-width: 769px) and (max-width: 1024px) {
   .certs-grid { 
     grid-template-columns: repeat(2, 1fr); 
-  }
-
-  .featured {
-    grid-column: span 2;
   }
 }
     /* ═══════════════════════════════════════════════════
